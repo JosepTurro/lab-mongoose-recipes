@@ -16,8 +16,52 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
-    // Run your code here, after you have insured that the connection was made
+    return Recipe.create({title:'Spageti Pomodoro', level: 'Amateur Chef', ingredients:['spageti', 'pomodoro', 'parmesano'], image:"https://images.media-allrecipes.com/images/75131.jpg", duration:10, creator: '07/10/2022'})
   })
+  .then ((resultat)=> {
+    console.log(resultat.title);
+  })
+  .then(()=>{
+    return Recipe.insertMany(data);
+  })
+  .then((resulta)=>{
+    console.log(resulta.title);
+  })
+  .then(()=>{
+    return Recipe.findOneAndUpdate({title: 'Rigatoni alla Genovese'}, {duration: 100})
+  })
+  .then((resulte)=>{
+    console.log(resulte.duration);
+  })
+  .then(()=>{
+    return Recipe.deleteOne({title: 'Carrot Cake'})
+  })
+  .then((res)=>{
+    console.log(res.title , ' eliminat')
+  })
+  
+
+  //// Aqui tanquem
+  process.on('SIGINT', ()=>{
+    mongoose.connection.close(()=>{
+        console.log("close!");
+        process.exit(0);
+    })
+  })
+
+  /// No se com saber si la ultima iteració (la de tancar el programa) m'ha sortit be.
+
+
+  
+
+
+
+
+
+
+
+  // abans d'aqui
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
